@@ -90,7 +90,7 @@ function ReserveDropdown({
         <p className="text-muted text-sm">No stock available at any warehouse.</p>
       ) : (
         <>
-          <label>Ship from</label>
+          <span className="reserve-dropdown-label">Ship from</span>
           <select
             value={warehouseId}
             onChange={(e) => {
@@ -105,7 +105,7 @@ function ReserveDropdown({
             ))}
           </select>
 
-          <label>Quantity</label>
+          <span className="reserve-dropdown-label">Quantity</span>
           <input
             type="number"
             min={1}
@@ -249,10 +249,19 @@ export default function ProductsPage() {
 
   return (
     <>
-      <div className="page-title">Live stock and holds</div>
-      <p className="page-intro">
-        Reserved items stay on hold until checkout is confirmed or the timer expires.
-      </p>
+      <div className="flex" style={{ alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
+        <div>
+          <div className="page-title" style={{ borderBottom: "none", marginBottom: 0, paddingBottom: 0 }}>
+            Live stock and holds
+          </div>
+          <p className="page-intro" style={{ marginBottom: 0, marginTop: 4 }}>
+            Reserved items stay on hold until checkout is confirmed or the timer expires.
+          </p>
+        </div>
+        {!loading && (
+          <span className="products-count">{products.length} product{products.length === 1 ? "" : "s"}</span>
+        )}
+      </div>
 
       {error && <div className="alert alert-error">{error}</div>}
 
